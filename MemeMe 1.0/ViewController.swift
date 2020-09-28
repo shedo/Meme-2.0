@@ -16,6 +16,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var topToolBar: UIToolbar!
     @IBOutlet weak var bottomToolBar: UIToolbar!
     @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    
     var topTextFieldEditMode = false;
     
     struct Meme {
@@ -67,14 +70,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         activityViewController.completionWithItemsHandler = { (activityType: UIActivity.ActivityType?, completed:
         Bool, arrayReturnedItems: [Any]?, error: Error?) in
             if completed {
-                print("share completed")
                 self.save()
                 return
-            } else {
-                print("cancel")
             }
             if let shareError = error {
-                print("error while sharing: \(shareError.localizedDescription)")
+                print("Error while sharing: \(shareError.localizedDescription)")
             }
         }
     }
@@ -127,14 +127,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @objc func keyboardWillShow(_ notification: Notification) {
-        if self.view.frame.origin.y == 0 && !self.topTextFieldEditMode {
-            self.view.frame.origin.y -= getKeyboardHeight(notification)
+        let keyboardHeight = getKeyboardHeight(notification)
+        if !self.topTextFieldEditMode {
+            // With iOS 14 need to use constraint
+            bottomConstraint.constant -= keyboardHeight
+            topConstraint.constant -= keyboardHeight
         }
     }
     
     @objc func keyboardWillHide(_ notification: Notification) {
-        if self.view.frame.origin.y != 0 {
-            self.view.frame.origin.y = 0
+        // With iOS 14 need to use constraint
+        if bottomConstraint.constant != 0 {
+            bottomConstraint.constant = 0
+            topConstraint.constant = 0
         }
     }
     

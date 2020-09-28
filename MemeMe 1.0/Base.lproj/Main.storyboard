@@ -58,13 +58,15 @@
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aNK-cO-W8H">
                                 <rect key="frame" x="20" y="128" width="374" height="49.5"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="40"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                             <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wth-tv-O6h">
                                 <rect key="frame" x="20" y="728.5" width="374" height="49.5"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -89,11 +91,13 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bottomConstraint" destination="LnI-Rz-fLo" id="4qr-mT-NTx"/>
                         <outlet property="bottomText" destination="Wth-tv-O6h" id="xqS-dk-0zr"/>
                         <outlet property="bottomToolBar" destination="AmR-56-spe" id="KbI-bK-tsU"/>
                         <outlet property="cameraButton" destination="xDF-CZ-O9S" id="mxc-0Y-MvV"/>
                         <outlet property="imageView" destination="V97-aQ-ZWU" id="L25-M8-TwV"/>
                         <outlet property="shareButton" destination="OZL-iU-8sj" id="cvO-cC-gKf"/>
+                        <outlet property="topConstraint" destination="qDw-DF-gvu" id="3Xw-NN-LT7"/>
                         <outlet property="topText" destination="aNK-cO-W8H" id="Nae-va-yDP"/>
                         <outlet property="topToolBar" destination="yy0-kl-py5" id="mGo-xK-LWE"/>
                     </connections>
