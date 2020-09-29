@@ -21,18 +21,25 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     var topTextFieldEditMode = false;
     
-    struct Meme {
-        let topText: String
-        let bottomText: String
-        let originalImage: UIImage
-        let memedImage: UIImage
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         shareButton.isEnabled = false
-        topText.delegate = self
-        bottomText.delegate = self
+        setupTextField(tf: topText, text: "TOP")
+        setupTextField(tf: bottomText, text: "BOTTOM")
+    }
+
+    func setupTextField(tf: UITextField, text: String) {
+        tf.defaultTextAttributes = [
+            NSAttributedString.Key.foregroundColor : UIColor.white,
+            NSAttributedString.Key.strokeColor : UIColor.black,
+            NSAttributedString.Key.font : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+            NSAttributedString.Key.strokeWidth: -4.0,
+        ]
+        tf.textColor = UIColor.white
+        tf.tintColor = UIColor.white
+        tf.textAlignment = .center
+        tf.text = text
+        tf.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,17 +55,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     @IBAction func pickAnImageFromAlbum(_ sender: Any) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .photoLibrary
-        present(imagePicker, animated: true, completion: nil)
+        chooseImageFromCameraOrPhoto(source: .photoLibrary)
     }
     
     @IBAction func pickAnImageFromCamera(_ sender: Any) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .camera
-        present(imagePicker, animated: true, completion: nil)
+        chooseImageFromCameraOrPhoto(source: .camera)
+    }
+    
+    func chooseImageFromCameraOrPhoto(source: UIImagePickerController.SourceType) {
+        let pickerController = UIImagePickerController()
+        pickerController.delegate = self
+        pickerController.allowsEditing = true
+        pickerController.sourceType = source
+        present(pickerController, animated: true, completion: nil)
     }
     
     @IBAction func shareMeme(_ sender: Any) {
