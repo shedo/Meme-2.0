@@ -1,6 +1,6 @@
 //
 //  SceneDelegate.swift
-//  MemeMe 1.0
+//  MemeMe 2.0
 //
 //  Created by Ivan Zandonà on 27/09/2020.
 //

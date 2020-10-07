@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  MemeMe 1.0
+//  MemeMe 2.0
 //
 //  Created by Ivan Zandonà on 27/09/2020.
 //
@@ -92,15 +92,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         topText.text = "TOP"
         bottomText.text = "BOTTOM"
         imageView.image = nil
+        dismiss(animated: true)
     }
     
     func save() {
         let meme = Meme(topText: topText.text!, bottomText: bottomText.text!, originalImage: imageView.image!, memedImage: generateMemedImage())
+        (UIApplication.shared.delegate as! AppDelegate).memes.append(meme)
+        dismiss(animated: true,
+                completion: {
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "modalIsDimissed"), object: nil)
+                })
     }
     
     func generateMemedImage() -> UIImage {
         self.topToolBar.isHidden = true
-        self.topToolBar.isHidden = true
+        self.bottomToolBar.isHidden = true
 
         UIGraphicsBeginImageContext(self.view.frame.size)
         view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)

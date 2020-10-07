@@ -1,6 +1,6 @@
 //
-//  MemeMe_1_0Tests.swift
-//  MemeMe 1.0Tests
+//  MemeMe_2_0Tests.swift
+//  MemeMe 2.0Tests
 //
 //  Created by Ivan Zandonà on 27/09/2020.
 //
